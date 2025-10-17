@@ -5,6 +5,8 @@ import authRouter from "./routes/authRoutes.js";
 import userRouter from "./routes/userRouter.js";
 import cookieParser from "cookie-parser";
 import createSuperAdmin from "./configs/createSuperAdmin.js";
+import assetModelRouter from "./routes/assetModelRoutes.js";
+import assetItemRouter from "./routes/assetItemRoutes.js";
 
 const app = express()
 
@@ -21,6 +23,8 @@ app.get("/", (req, res) => res.send({ message: "Server at Work" }))//demo
 
 app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/user", userRouter)
+app.use("/api/v1/asset-model", assetModelRouter)
+app.use("/api/v1/asset-item", assetItemRouter)
 
 
 
