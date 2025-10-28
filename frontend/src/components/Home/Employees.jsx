@@ -6,7 +6,7 @@ function Employees() {
     const [employees, setEmployees] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [editEmployee, setEditEmployee] = useState({})
-    const fetchEmployees = async () => {
+    const fetchEmployees = async () => {0
         try {
             let response = await axios.get("http://localhost:8080/api/v1/user/employees",
                 { withCredentials: true })
