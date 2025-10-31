@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import EmployeeEditModal from "../EmployeeEditModal"
 import axios from "axios"
+import toast from "react-hot-toast"
 
 function Employees() {
     const [employees, setEmployees] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [editEmployee, setEditEmployee] = useState({})
-    const fetchEmployees = async () => {0
+    const fetchEmployees = async () => {
         try {
             let response = await axios.get("http://localhost:8080/api/v1/user/employees",
                 { withCredentials: true })
@@ -31,6 +32,20 @@ function Employees() {
     const addEmployeeModal = () => {
         setEditEmployee({}) //for safe adding
         setIsModalOpen(true)
+    }
+    const handleDelete = async (employee) => {
+        try {
+            toast.loading("Deleting.......", { id: "delete" })
+
+            await axios.delete("http://localhost:8080/api/v1/user/delete/employee",
+                { withCredentials: true, headers: { userid: employee._id } })
+
+            await fetchEmployees()
+
+            toast.success("User Details Deleted", { id: "delete" })
+        } catch (error) {
+            toast.error("Failed to delete", { id: "delete" })
+        }
     }
     return (
         <>
@@ -97,7 +112,8 @@ function Employees() {
 
                                             <button className="text-md text-white  hover:underline bg-blue-500 py-2 px-2 rounded-full"
                                                 onClick={() => handleModalOpen(employee)}>Edit user</button>
-                                            <button className="text-md text-white hover:underline bg-red-500 py-2 px-2 rounded-full"> Delete</button>
+                                            <button className="text-md text-white hover:underline bg-red-500 py-2 px-2 rounded-full"
+                                                onClick={() => handleDelete(employee)}> Delete</button>
                                         </td>
                                     </tr>
                                 )

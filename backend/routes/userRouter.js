@@ -25,9 +25,9 @@ userRouter.put("/edit/employee", verifyUser, checkRole(["admin", "super admin"])
 userRouter.put("/edit/admin", verifyUser, checkRole(["super admin"]), editAdmin)
 
 //delete
-userRouter.put("/delete/employee", verifyUser, checkRole(["admin", "super admin"]), deleteUser)
+userRouter.delete("/delete/employee", verifyUser, checkRole(["admin", "super admin"]), deleteUser)
 
-userRouter.put("/delete/admin", verifyUser, checkRole(["super admin"]), deleteUser)
+userRouter.delete("/delete/admin", verifyUser, checkRole(["super admin"]), deleteUser)
 
 
 //update

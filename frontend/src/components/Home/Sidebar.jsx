@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, NavLink } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 
 let sidebarLinks = [
@@ -35,7 +35,7 @@ function Sidebar() {
                 <div className={"flex flex-col py-4 px-2 w-4/5 justify-center gap-8"}>
                     {
                         links.map(myLink => {
-                            return <Link key={myLink.label} to={myLink.path} className="shadow-md shadow-gray-600 h-10 rounded-2xl text-center content-center text-xl font-semibold w-full hover:bg-gray-200">{myLink.label}</Link>
+                            return <NavLink key={myLink.label} to={myLink.path} className={({ isActive }) => `shadow-md shadow-gray-600 h-10 rounded-2xl text-center content-center text-xl font-semibold w-full hover:bg-gray-200 ${isActive ? "bg-gray-300" : ""}`}>{myLink.label}</NavLink>
                         })
                     }
                 </div>
