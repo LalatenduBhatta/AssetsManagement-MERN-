@@ -1,15 +1,18 @@
 import express from "express"
 import { verifyUser } from "../middlewares/verifyUser.js"
 import { checkRole } from "../middlewares/checkRole.js"
-import { addAssetModel } from "../controllers/assetModelController.js"
+import { addAssetModel, deleteAssetModel, editAssetModel } from "../controllers/assetModelController.js"
 
 const assetModelRouter = express.Router()
 
 //add
 assetModelRouter.post("/add", verifyUser, checkRole(["super admin", "admin"]), addAssetModel)
 
+//update (params)
+assetModelRouter.put("/edit/:id", verifyUser, checkRole(["super admin", "admin"]), editAssetModel)
 
-
+//delete (queries)
+assetModelRouter.delete("/delete", verifyUser, checkRole(["super admin", "admin"]), deleteAssetModel)
 
 
 export default assetModelRouter

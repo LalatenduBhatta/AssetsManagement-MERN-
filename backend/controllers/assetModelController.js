@@ -20,3 +20,40 @@ export const addAssetModel = async (req, res) => {
         })
     }
 }
+
+export const editAssetModel = async (req, res) => {
+    try {
+        if (req.body) {
+            let { id } = req.params //get the id from req params
+            let response = await AssetModel.findByIdAndUpdate(id, { $set: { ...req.body } })
+            if (response)
+                return res.status(200).send({ message: "Asset Model Updated" })
+            else
+                return res.status(400).send({ error: "Asset Model Not Found" })
+        } else {
+            return res.status(400).send({ error: "Body Can not be empty" })
+        }
+    } catch (error) {
+        return res.status(500).send({
+            message: "Something went worng",
+            error: error.message
+        })
+    }
+}
+
+
+export const deleteAssetModel = async (req, res) => {
+    try {
+        let { id } = req.query
+        let response = await AssetModel.findByIdAndDelete(id)
+        if (response)
+            return res.status(200).send({ message: "Asset Model Deleted" })
+        else
+            return res.status(400).send({ error: "Asset Model Not Found" })
+    } catch (error) {
+        return res.status(500).send({
+            message: "Something went worng",
+            error: error.message
+        })
+    }
+}
