@@ -1,3 +1,4 @@
+import AssetItem from "../models/AssetItem.js"
 import AssetModel from "../models/AssetModel.js"
 
 export const addAssetModel = async (req, res) => {
@@ -45,11 +46,52 @@ export const editAssetModel = async (req, res) => {
 export const deleteAssetModel = async (req, res) => {
     try {
         let { id } = req.query
-        let response = await AssetModel.findByIdAndDelete(id)
-        if (response)
-            return res.status(200).send({ message: "Asset Model Deleted" })
+        let isModel = await AssetModel.findById(id)
+        if (isModel) {
+            let isItems = await AssetItem.findOne({ model: id })
+            if (isItems) {
+                res.status(400).send({ error: "Can not delete the model used for items" })
+            }
+            else {
+                await AssetModel.findByIdAndDelete(id)
+                return res.status(200).send({ message: "Asset Model is Deleted" })
+            }
+        }
         else
             return res.status(400).send({ error: "Asset Model Not Found" })
+    } catch (error) {
+        return res.status(500).send({
+            message: "Something went worng",
+            error: error.message
+        })
+    }
+}
+
+
+export const getAssetModels = async (req, res) => {
+    try {
+        const response = await AssetModel.find()
+        return res.status(200).send(response)
+    } catch (error) {
+        return res.status(500).send({
+            message: "Something went worng",
+            error: error.message
+        })
+    }
+}
+
+
+export const getAssetModelsWithItems = async (req, res) => {
+    try {
+        let allModelsWithItems = await AssetModel.aggregate([{
+            $lookup: {
+                localField: "_id",
+                from: "assetitems",
+                foreignField: "model",
+                as: "items",
+            }
+        }])
+        res.status(200).send(allModelsWithItems)
     } catch (error) {
         return res.status(500).send({
             message: "Something went worng",
