@@ -58,30 +58,30 @@ function AssetEditModal({ handleModalClose, editAsset }) {
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label htmlFor="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                    <input type="text" name="name" id="name" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={""} onChange={onChangeHandler} />
+                                    <input type="text" name="name" id="name" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={assetDetails.name ? assetDetails.name : ""} onChange={onChangeHandler} />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label htmlFor="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                    <input type="email" name="email" id="email" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={""} onChange={onChangeHandler} />
+                                    <label htmlFor="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                    <input type="category" name="category" id="category" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={assetDetails.category ? assetDetails.category : ""} onChange={onChangeHandler} />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label htmlFor="mobile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                                    <input type="number" name="mobile" id="mobile" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={""} onChange={onChangeHandler} />
+                                    <label htmlFor="manufacturer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Manufacture</label>
+                                    <input type="text" name="manufacturer" id="manufacturer" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required value={assetDetails.manufacturer ? assetDetails.manufacturer : ""} onChange={onChangeHandler} />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label htmlFor="department" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Department</label>
-                                    <input type="text" name="department" id="department" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={""} onChange={onChangeHandler} />
+                                    <label htmlFor="usefulLifeYears" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Use Life Years</label>
+                                    <input type="number" name="usefulLifeYears" id="usefulLifeYears" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={assetDetails.usefulLifeYears ? assetDetails.usefulLifeYears : ""} onChange={onChangeHandler} />
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label htmlFor="designation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Designation</label>
-                                    <input type="text" name="designation" id="designation" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={""} onChange={onChangeHandler} />
-                                </div>
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label htmlFor="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                                    <select type="text" name="status" id="status" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={""} onChange={onChangeHandler}>
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
+                                    <label htmlFor="depreciationMethod" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Depreciation Method</label>
+                                    <select type="text" name="depreciationMethod" id="depreciationMethod" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={assetDetails.depreciationMethod ? assetDetails.depreciationMethod : ""} onChange={onChangeHandler}>
+                                        <option value="straightline">Straight Line</option>
+                                        <option value="reducingbalance">Reducing Balance</option>
                                     </select>
+                                </div>
+                                <div class="col-span-12 sm:col-span-6">
+                                    <label htmlFor="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                                    <textarea type="text" name="description" id="description" class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={assetDetails.description ? assetDetails.description : ""} onChange={onChangeHandler} />
                                 </div>
                             </div>
                         </div>
