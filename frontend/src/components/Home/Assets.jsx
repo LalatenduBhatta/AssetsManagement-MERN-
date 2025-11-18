@@ -2,15 +2,18 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import AssetEditModal from "../AssetEditModel"
+import { useNavigate } from "react-router-dom"
 
 function Assets() {
     const [assets, setAssets] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [editAsset, setEditAsset] = useState({})
-
+    const navigate = useNavigate()
     useEffect(() => {
-        getAssets()
-    }, [])
+        if (!isModalOpen) {
+            getAssets()
+        }
+    }, [isModalOpen])
     async function getAssets() {
         try {
             let response = await axios.get("http://localhost:8080/api/v1/asset-model/all/items", { withCredentials: true })
@@ -32,10 +35,14 @@ function Assets() {
     }
     const handleModalClose = () => {
         setIsModalOpen(false)
+        setEditAsset({})
     }
     const handleEdit = (asset) => {
         setEditAsset(asset)
         setIsModalOpen(true)
+    }
+    const navigateToShowItems = (id) => {
+        navigate(`/asset-model/${id}`)
     }
     return (
         <>
@@ -103,6 +110,9 @@ function Assets() {
                                             <button className="text-md text-white hover:underline bg-red-500 py-2 px-2 rounded-full"
                                                 onClick={() => handleDelete(asset._id)}
                                             > Delete</button>
+                                            <button className="text-md text-white hover:underline bg-green-500 py-2 px-2 rounded-full cursor-pointer"
+                                                onClick={() => navigateToShowItems(asset._id)}
+                                            > Items</button>
                                         </td>
                                     </tr>
                                 )

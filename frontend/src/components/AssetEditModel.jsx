@@ -3,6 +3,7 @@ import { useState } from "react"
 
 function AssetEditModal({ handleModalClose, editAsset }) {
     const isEdit = Object.keys(editAsset).length > 0 // edit mode or add mode
+    console.log(editAsset)
 
     const [assetDetails, setAssetDetails] = useState(isEdit ? editAsset : {})
 
@@ -87,7 +88,7 @@ function AssetEditModal({ handleModalClose, editAsset }) {
                         </div>
                         {/* <!-- Modal footer --> */}
                         <div class="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
-                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{isEdit ? "Save Changes" : "Add Admin"}</button>
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{isEdit ? "Save Changes" : "Add Assets"}</button>
                         </div>
                     </form>
                 </div >

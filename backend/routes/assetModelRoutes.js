@@ -1,7 +1,7 @@
 import express from "express"
 import { verifyUser } from "../middlewares/verifyUser.js"
 import { checkRole } from "../middlewares/checkRole.js"
-import { addAssetModel, deleteAssetModel, editAssetModel, getAssetModels, getAssetModelsWithItems } from "../controllers/assetModelController.js"
+import { addAssetModel, deleteAssetModel, editAssetModel, getAssetModels, getAssetModelsWithItems, getItemsOfTheModel } from "../controllers/assetModelController.js"
 
 const assetModelRouter = express.Router()
 
@@ -19,5 +19,8 @@ assetModelRouter.get("/all", verifyUser, getAssetModels)
 
 //get all with items
 assetModelRouter.get("/all/items", verifyUser, getAssetModelsWithItems)
+
+//get asset model with items
+assetModelRouter.get("/:id", verifyUser, getItemsOfTheModel)
 
 export default assetModelRouter
