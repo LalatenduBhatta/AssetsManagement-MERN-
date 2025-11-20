@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import createSuperAdmin from "./configs/createSuperAdmin.js";
 import assetModelRouter from "./routes/assetModelRoutes.js";
 import assetItemRouter from "./routes/assetItemRoutes.js";
+import assignedAssetRouter from "./routes/assignedAssetRoutes.js";
 
 const app = express()
 
@@ -25,6 +26,7 @@ app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/asset-model", assetModelRouter)
 app.use("/api/v1/asset-item", assetItemRouter)
+app.use("/api/v1/assigned-asset", assignedAssetRouter)
 
 
 
