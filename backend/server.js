@@ -14,7 +14,7 @@ const app = express()
 //middlewares
 app.use(express.json()) //json parser
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "http://localhost:5174"],
     credentials: true
 })) //cross origin allow
 app.use(cookieParser()) //cookies parser

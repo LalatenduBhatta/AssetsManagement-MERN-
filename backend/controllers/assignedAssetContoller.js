@@ -72,3 +72,59 @@ export const getMyAssinedAssets = async (req, res) => {
     }
 }
 
+// -----------------------------------------------------------------------------
+// UPDATE ASSIGNED ASSET
+// -----------------------------------------------------------------------------
+export const updateAssignedAsset = async (req, res) => {
+    try {
+        if (!req.body) {
+            return res.status(400).send({ error: "Body cannot be empty" });
+        }
+
+        const { id } = req.params;
+        const { assignedTo, assetItem, status, notes } = req.body;
+        const assignedBy = req.user._id;
+
+        if (!id) {
+            return res.status(400).send({ error: "Id is not valid" });
+        }
+
+        const isAssignedAsset = await AssignedAsset.findById(id);
+        if (!isAssignedAsset) {
+            return res.status(400).send({ error: "Assigned asset not found" });
+        }
+
+        // Validate new asset item
+        if (assetItem) {
+            const isItem = await AssetItem.findById(assetItem);
+            if (!isItem || isItem.status !== "available") {
+                return res.status(400).send({ error: "Asset is not present or not available" });
+            }
+        }
+
+        // Validate new assigned user
+        if (assignedTo) {
+            const isUser = await User.findById(assignedTo);
+            if (!isUser || isUser.status !== "active") {
+                return res.status(400).send({ error: "User is not valid or inactive" });
+            }
+        }
+
+        // Update fields
+        isAssignedAsset.assignedBy = assignedBy;
+        if (assignedTo) isAssignedAsset.assignedTo = assignedTo;
+        if (assetItem) isAssignedAsset.assetItem = assetItem;
+        if (status) isAssignedAsset.status = status;
+        if (notes) isAssignedAsset.notes = notes;
+
+        await isAssignedAsset.save();
+
+        if (assetItem) {
+            await AssetItem.findByIdAndUpdate(assetItem, { status: "assigned" });
+        }
+
+        return res.status(200).send({ message: "Assigned asset updated successfully" });
+    } catch (error) {
+        return res.status(500).send({ error: "Something went wrong" });
+    }
+};
