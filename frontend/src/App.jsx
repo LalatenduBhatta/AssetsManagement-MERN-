@@ -9,6 +9,7 @@ import Admins from "./components/Home/Admins"
 import Employees from "./components/Home/Employees"
 import Assets from "./components/Home/Assets"
 import AllAssetItems from "./components/Home/AllAssetItems"
+import AssignedAssets from "./components/Home/AssignedAssets"
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
           <Route path="requests" element={<h1>Requests</h1>}></Route>
           <Route path="profile" element={<h1>Profile</h1>}></Route>
           <Route path="employees" element={<Employees />}></Route>
-          <Route path="assigned-assets" element={<h1>Assigned Assets</h1>}></Route>
+          <Route path="assigned-assets" element={<AssignedAssets />}></Route>
         </Route>
 
         <Route path="*" element={<ErrorPage />}></Route>

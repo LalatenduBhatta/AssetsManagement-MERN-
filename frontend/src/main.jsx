@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom"
 import { AuthProvider } from './contexts/AuthContext.jsx'
 import "flowbite/dist/flowbite.js"
 
+
 createRoot(document.getElementById('root')).render(
   // <StrictMode>
   <BrowserRouter>

@@ -72,9 +72,7 @@ export const getMyAssinedAssets = async (req, res) => {
     }
 }
 
-// -----------------------------------------------------------------------------
-// UPDATE ASSIGNED ASSET
-// -----------------------------------------------------------------------------
+
 export const updateAssignedAsset = async (req, res) => {
     try {
         if (!req.body) {
@@ -126,5 +124,42 @@ export const updateAssignedAsset = async (req, res) => {
         return res.status(200).send({ message: "Assigned asset updated successfully" });
     } catch (error) {
         return res.status(500).send({ error: "Something went wrong" });
+    }
+};
+
+
+export const returnAssignedAsset = async (req, res) => {
+    try {
+        if (!req.body) {
+            return res.status(400).send({ error: "Body cannot be empty" });
+        }
+
+        const { id } = req.params;
+        const { returnDate, conditionOnReturn } = req.body;
+
+        if (!id) {
+            return res.status(400).send({ error: "Id is not valid" });
+        }
+
+        const isAssignedAsset = await AssignedAsset.findById(id);
+        if (!isAssignedAsset) {
+            return res.status(400).send({ error: "Assigned asset not found" });
+        }
+
+        if (isAssignedAsset.status !== "approved") {
+            return res.status(400).send({ error: "Assigned asset can not be returned or already returned" });
+        }
+
+        isAssignedAsset.returnDate = returnDate
+        isAssignedAsset.conditionOnReturn = conditionOnReturn
+        isAssignedAsset.status = "returned"
+        await isAssignedAsset.save()
+
+        await AssetItem.findByIdAndUpdate(isAssignedAsset.assetItem, { $set: { status: "available" } })
+
+        return res.status(200).send({ message: "Assined Asset Returned Successfully" })
+
+    } catch (error) {
+        return res.status(500).send({ error: "Something went wrong", message: error.message });
     }
 };
